@@ -22,15 +22,18 @@ obs. this codebook describes only the modifications made on the original dataset
 
 ## run_analysis.R
 * R commands used on the dataset manipulation
+
 ### variables
 * dirBse, dirTst, dirTrn, dirSgn - text names for the directories used
 * dirLoc - text name for test and train subdirectories
 * fFeatLbl - complete filename for features.txt
 * fAtvLbl - complete filename for activity_labels.txt
 * fileName - auxiliar variable with the complete filename to be read
+
 ### Vectors
 * vFeatLbl - labels read from features.txt
 * vAtvLbl - labels read from activity_labels.txt
+
 ### working Data.Tables
 * dtAux
 * dtSubTst, dtSubTrn
