@@ -3,7 +3,7 @@ library(data.table)
 # -------------------
 # directories
 # -------------------
-dirBse <- "UCI HAR Dataset"
+dirBse <- "../UCI HAR Dataset"
 dirTst <- "test"
 dirTrn <- "train"
 dirSgn <- "Inertial Signals"
@@ -59,28 +59,28 @@ readDataSet <- function( dirBse, dirLoc, labels ) {
 # -------------------
 
 ## dtSubTst
-dtSubTst <- readSubject( dirBse, dirTst )
+vSubTst <- readSubject( dirBse, dirTst )
 
 ## dtAtvTst
-dtAtvTst <- readActivity( dirBse, dirTst, vAtvLbl )
+vAtvTst <- readActivity( dirBse, dirTst, vAtvLbl )
 
 ## dtTst
 # create the main Test data frame, with Subject, Activity and the 561 DataSet cols
-dtTst <- cbind( data.frame(Subject=dtSubTst, Activity=dtAtvTst), readDataSet(dirBse, dirTst, vFeatLbl) )
+dtTst <- cbind( data.frame(Subject=vSubTst, Activity=vAtvTst), readDataSet(dirBse, dirTst, vFeatLbl) )
 
 # -------------------
 # train dir files
 # -------------------
 
 ## dtSubTrn
-dtSubTrn <- readSubject( dirBse, dirTrn )
+vSubTrn <- readSubject( dirBse, dirTrn )
 
 ## dtAtvTrn
-dtAtvTrn <- readActivity( dirBse, dirTrn, vAtvLbl )
+vAtvTrn <- readActivity( dirBse, dirTrn, vAtvLbl )
 
 ## dtTrn
 # create the main Train data frame, with Subject, Activity and the 561 DataSet cols
-dtTrn <- cbind( data.frame(Subject=dtSubTrn, Activity=dtAtvTrn), readDataSet(dirBse, dirTrn, vFeatLbl) )
+dtTrn <- cbind( data.frame(Subject=vSubTrn, Activity=vAtvTrn), readDataSet(dirBse, dirTrn, vFeatLbl) )
 
 # -------------------
 # Merging Test and Train DataSets
