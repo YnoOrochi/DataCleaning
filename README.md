@@ -7,6 +7,8 @@
 * README.md - this file, with basic description of the files in the repository
 * CodeBook.md - a basic description on the operations and modification on the original dataset
 * run_analysis.R - the R script used to modify the original dataset
+
+## Created datasets
 * mergeData.txt - a new dataset that merges X_Test.txt, X_Train.txt and their labels
 * averageData.txt - a data set with the average of each variable for each activity and each subject
 
