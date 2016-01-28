@@ -16,11 +16,16 @@ dirSgn <- "Inertial Signals"
 # names vector (561) to the main data set
 fFeatLbl <- paste(dirBse, "features.txt", sep="/")
 vFeatLbl <- fread(fFeatLbl)[[2]]
+# cut ( and ) characters
+vFeatLbl <- gsub("[(|)]","",vFeatLbl)
+# change , charaters for -
+vFeatLbl <- gsub(",","-",vFeatLbl)
 
 ## vActLbl
 # activity labels vector (6)
 fAtvLbl <- paste(dirBse, "activity_labels.txt", sep="/")
-vAtvLbl <- fread(fAtvLbl)[[2]]
+# changes to lowercase and without _
+vAtvLbl <- tolower(gsub("_","",fread(fAtvLbl)[[2]]))
 
 # -------------------
 # auxiliary functions - used for Test and Train

@@ -31,8 +31,8 @@ obs. this codebook describes only the modifications made on the original dataset
 * fileName - auxiliar variable with the complete filename to be read
 
 ### Vectors
-* vFeatLbl - labels read from features.txt
-* vAtvLbl - labels read from activity_labels.txt
+* vFeatLbl - labels read from features.txt (without parenthesis or ,)
+* vAtvLbl - labels read from activity_labels.txt (lowercase and without underscores)
 * vSubTst, vSubTrn - vector where the subject data, read from subject_test.txt and subject_train.txt, is stored
 * vAtvTst, vAtvTrn - vector where the activity data, read from y_test.txt and y_train.txt, is stored, using the labels in place of the codes
 
