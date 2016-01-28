@@ -89,16 +89,19 @@ dtTrn <- cbind( data.frame(Subject=dtSubTrn, Activity=dtAtvTrn), readDataSet(dir
 ## --- Project Goal 1
 # row bind test and train datasets
 dtMrg <- rbind(dtTst, dtTrn)
+# Writing the file
 write.table(dtMrg, file="mergedData.txt", row.names=FALSE)
 
 ## --- Project Goal 2
 # calculate the mean and std deviation for all numeric columns
 # dtMnSd data.frame summarizes Mean and StdDev for all variables on dtMrg
-Mean <- apply(dtMrg[,3:563], 2, mean)
-StdDev <- apply(dtMrg[,3:563], 2, sd)
-dtMnSd <- rbind(Mean, StdDev)
+dtMnSd <- rbind(apply(dtMrg[,3:563], 2, mean), apply(dtMrg[,3:563], 2, sd))
 
 ## --- Project Goal 5
 # Calculate the average by Subject AND Activity groups
-GroupMean <- aggregate(. ~ Subject + Activity, dtMrg, mean)
+GroupMean <- aggregate(dtMrg[,3:563], by=list(dtMrg$Subject, dtMrg$Activity), FUN=mean, na.rm=TRUE)
+# Fixing the names changed by aggregate (I know it is not the best way, but it works)
+names(GroupMean)[names(GroupMean)=="Group.1"] <- "Subject"
+names(GroupMean)[names(GroupMean)=="Group.2"] <- "Activity"
+# Writing the file
 write.table(GroupMean, file="averageData.txt", row.names=FALSE)
