@@ -2,6 +2,7 @@
 ## Final Assignment
 
 # README
+I misunderstood the "extract average and standard deviation" expression and now I rebuilt the scrip to fix it. A single grepl command was added to the script and the function to calculate mean and sd of all columns was erased.
 
 ## Submited files
 * README.md - this file, with basic description of the files in the repository

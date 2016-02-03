@@ -56,7 +56,8 @@ readDataSet <- function( dirBse, dirLoc, labels ) {
 	dtAux <- read.table(fileName)
 	## --- Project Goal 4
 	names(dtAux) <- labels
-	dtAux
+	## --- Project Goal 2
+	dtAux[grepl(labels, pattern="([Mm]ean)|([Ss]td)")]
 }
 
 # -------------------
@@ -70,7 +71,7 @@ vSubTst <- readSubject( dirBse, dirTst )
 vAtvTst <- readActivity( dirBse, dirTst, vAtvLbl )
 
 ## dtTst
-# create the main Test data frame, with Subject, Activity and the 561 DataSet cols
+# create the main Test data frame, with Subject, Activity and the Mean and Std variables
 dtTst <- cbind( data.frame(Subject=vSubTst, Activity=vAtvTst), readDataSet(dirBse, dirTst, vFeatLbl) )
 
 # -------------------
@@ -84,7 +85,7 @@ vSubTrn <- readSubject( dirBse, dirTrn )
 vAtvTrn <- readActivity( dirBse, dirTrn, vAtvLbl )
 
 ## dtTrn
-# create the main Train data frame, with Subject, Activity and the 561 DataSet cols
+# create the main Train data frame, with Subject, Activity and the Mean and Std variables
 dtTrn <- cbind( data.frame(Subject=vSubTrn, Activity=vAtvTrn), readDataSet(dirBse, dirTrn, vFeatLbl) )
 
 # -------------------
@@ -97,16 +98,8 @@ dtMrg <- rbind(dtTst, dtTrn)
 # Writing the file
 write.table(dtMrg, file="mergedData.txt", row.names=FALSE)
 
-## --- Project Goal 2
-# calculate the mean and std deviation for all numeric columns
-# dtMnSd data.frame summarizes Mean and StdDev for all variables on dtMrg
-dtMnSd <- rbind(apply(dtMrg[,3:563], 2, mean), apply(dtMrg[,3:563], 2, sd))
-
 ## --- Project Goal 5
 # Calculate the average by Subject AND Activity groups
-GroupMean <- aggregate(dtMrg[,3:563], by=list(dtMrg$Subject, dtMrg$Activity), FUN=mean, na.rm=TRUE)
-# Fixing the names changed by aggregate (I know it is not the best way, but it works)
-names(GroupMean)[names(GroupMean)=="Group.1"] <- "Subject"
-names(GroupMean)[names(GroupMean)=="Group.2"] <- "Activity"
+GroupMean <- aggregate(dtMrg[,3:ncol(dtMrg)], by=list(Subject=dtMrg$Subject, Activity=dtMrg$Activity), FUN=mean, na.rm=TRUE)
 # Writing the file
 write.table(GroupMean, file="averageData.txt", row.names=FALSE)
